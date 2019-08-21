@@ -1,0 +1,38 @@
+1.
+
+select m_name from musician m join concert c on m.m_no=c.concert_orgniser where concert_venue="Assembly Rooms" and con_date>"1997-02-01";
++---------------+
+| m_name        |
++---------------+
+| James Steeple |
++---------------+
+1 row in set (0.00 sec)
+
+2.
+
+select m_name from musician m join performer p on m_no=perf_is join place on born_in=place_no where instrument in ("guitar","violin") and place_country="England";
++------------------+
+| m_name           |
++------------------+
+| Harry Forte      |
+| Davis Heavan     |
+| Alan Fluff       |
+| Theo Mengel      |
+| James First      |
+| Harriet Smithson |
++------------------+
+6 rows in set (0.00 sec)
+
+3.
+
+select m_name,place_town,con_date from musician join concert on m_no=concert_orgniser join place on place_no=concert_in where place_country="USA";
++---------------+------------+------------+
+| m_name        | place_town | con_date   |
++---------------+------------+------------+
+| James Steeple | New York   | 1997-01-15 |
++---------------+------------+------------+
+1 row in set (0.00 sec)
+
+4.
+
+

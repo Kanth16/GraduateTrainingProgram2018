@@ -1,0 +1,235 @@
+create table Highschooler(ID integer(4) primary key,name varchar(20),grade integer(3));
+insert into highschooler values(1510,"Jordan",9);
+insert into highschooler values(1689,"Gabriel",9);
+insert into highschooler values(1381,"Tiffany",9);
+insert into highschooler values(1709,"Cassandra",9);
+insert into highschooler values(1101,"Haley",10);
+insert into highschooler values(1782,"Andrew",10);
+insert into highschooler values(1468,"Kris",10);
+insert into highschooler values(1641,"Brittany",10);
+insert into highschooler values(1247,"Alexis",11);
+insert into highschooler values(1316,"Alustin",11);
+insert into highschooler values(1911,"Gabriel",11);
+insert into highschooler values(1501,"Jessica",11);
+insert into highschooler values(1304,"Jordan",12);
+insert into highschooler values(1025,"John",12);
+insert into highschooler values(1934,"Kyle",12);
+insert into highschooler values(1661,"Logan",12);
+
+-------------------------------------------------------------------------------
+
+create table Friend(ID1 integer(4),ID2 integer(4),foreign key(ID1) references highschooler(id),foreign key(ID2) references highschooler(id));
+
+insert into friend values(1510,1381) ;
+insert into friend values(1510,1689 );
+insert into friend values(1689 ,1709 );
+insert into friend values(1381 ,1247);
+insert into friend values( 1709 ,1247);
+insert into friend values( 1689 ,1782);
+ insert into friend values(1782, 1468);
+ insert into friend values(1782 ,1316);
+ insert into friend values(1782 ,1304);
+ insert into friend values(1468 ,1101);
+ insert into friend values(1468 ,1641);
+ insert into friend values(1101 ,1641);
+ insert into friend values(1247 ,1911);
+ insert into friend values(1247 ,1501);
+ insert into friend values(1911 ,1501);
+ insert into friend values(1501 ,1934 );
+insert into friend values(1316 ,1934);
+insert into friend values( 1934 ,1304);
+ insert into friend values(1304 ,1661);
+ insert into friend values(1661 ,1025);
+ insert into friend values(1381 ,1510);
+insert into friend values(1689 ,1510 );
+insert into friend values(1709 ,1689);
+insert into friend values( 1247 ,1381);
+ insert into friend values(1247 ,1709);
+ insert into friend values(1782 ,1689);
+insert into friend values( 1468 ,1782);
+ insert into friend values(1316 ,1782);
+ insert into friend values(1304 ,1782);
+ insert into friend values(1101 ,1468);
+ insert into friend values(1641 ,1468);
+ insert into friend values(1641 ,1101);
+ insert into friend values(1911 ,1247);
+ insert into friend values(1501 ,1247);
+ insert into friend values(1501 ,1911);
+ insert into friend values(1934 ,1501);
+ insert into friend values(1934 ,1316 );
+insert into friend values(1304 ,1934);
+ insert into friend values(1661 ,1304);
+ insert into friend values(1025 ,1661);
+
+----------------------------------------------------------------------------------
+
+
+create table Likes(ID1 integer(4),ID2 integer(4),foreign key(ID1) references highschooler(id),foreign key(ID2) references highschooler(id));
+
+insert into likes values(1689 ,1709);
+insert into likes values( 1709 ,1689);
+ insert into likes values(1782 ,1709);
+ insert into likes values(1911 ,1247 );
+insert into likes values(1247 ,1468 );
+insert into likes values(1641 ,1468 );
+insert into likes values(1316 ,1304);
+ insert into likes values(1501 ,1934);
+ insert into likes values(1934 ,1501);
+ insert into likes values(1025 ,1101);
+
+
+-----------------------------------------------------------------------------------
+
+1.
+
+select name from highschooler h join friend f on h.id=f.id1 where id2 in (select id from highschooler where name="Gabriel");
++-----------+
+| name      |
++-----------+
+| Jordan    |
+| Cassandra |
+| Andrew    |
+| Alexis    |
+| Jessica   |
++-----------+
+5 rows in set (0.00 sec)
+
+2.
+
+
+
+
+3.
+
+select name,grade from highschooler where id in (select a.id2 from likes a join likes b on a.id1=b.id2 and a.id2=b.id1) group by name,grade order by name,grade;
++-----------+-------+
+| name      | grade |
++-----------+-------+
+| Cassandra |     9 |
+| Gabriel   |     9 |
+| Jessica   |    11 |
+| Kyle      |    12 |
++-----------+-------+
+4 rows in set (0.00 sec)
+
+4.
+
+select name,grade from highschooler where id not in (select id1 from likes) and id or in (select id2 from likes) order by grade,name;
++----------+-------+
+| name     | grade |
++----------+-------+
+| Jordan   |     9 |
+| Tiffany  |     9 |
+| Andrew   |    10 |
+| Brittany |    10 |
+| Haley    |    10 |
+| Kris     |    10 |
+| Austin   |    11 |
+| Gabriel  |    11 |
+| John     |    12 |
+| Jordan   |    12 |
+| Logan    |    12 |
++----------+-------+
+11 rows in set (0.00 sec)
+
+5.
+
+select name,grade from highschooler where id in (select id2 from likes where id2 not in (select id1 from likes));
++--------+-------+
+| name   | grade |
++--------+-------+
+| Haley  |    10 |
+| Jordan |    12 |
+| Kris   |    10 |
++--------+-------+
+3 rows in set (0.00 sec)
+                                          or
+
+select name,grade from highschooler h join likes l on id=id2 where id2 not in (select id1 from likes) group by name,grade;
++--------+-------+
+| name   | grade |
++--------+-------+
+| Haley  |    10 |
+| Jordan |    12 |
+| Kris   |    10 |
++--------+-------+
+3 rows in set (0.00 sec)
+
+6.
+
+
+
+
+7.
+
+
+
+
+8.
+
+select a-b as difference from ((select count(*) a from highschooler) a1,(select count(distinct name) b from highschooler) a2) ;
++------------+
+| difference |
++------------+
+|          2 |
++------------+
+1 row in set (0.00 sec)
+
+9.
+
+select name,grade from highschooler where id in(select id2 from likes group by id2 having count(id1)>1);
++-----------+-------+
+| name      | grade |
++-----------+-------+
+| Kris      |    10 |
+| Cassandra |     9 |
++-----------+-------+
+2 rows in set (0.05 sec)
+
+10.
+
+
+
+
+11.
+
+
+
+
+
+12.
+
+select avg(c) from (select count(id1) c from friend group by id2) a;
++--------+
+| avg(c) |
++--------+
+| 2.5000 |
++--------+
+1 row in set (0.02 sec)
+
+13.
+
+
+
+
+
+
+14.
+
+select max(c) from (select count(id1) c from friend group by id2) a;
++--------+
+| max(c) |
++--------+
+|      4 |
++--------+
+1 row in set (0.00 sec)
+
+
+
+
+
+
+
+
+
+

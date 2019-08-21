@@ -1,0 +1,251 @@
+1.
+
+select * from hotel h,room r,booking b,guest g where h.hotel_no=r.hotel_no and r.hotel_no=b.hotel_no and b.guest_no=g.guest_no;
++----------+-----------------+----------+---------+----------+------+--------+----------+----------+------------+------------+---------+----------+---------------+--------------+
+| hotel_no | name            | city     | room_no | hotel_no | type | price  | hotel_no | guest_no | date_from  | date_to    | room_no | guest_no | name          | city         |
++----------+-----------------+----------+---------+----------+------+--------+----------+----------+------------+------------+---------+----------+---------------+--------------+
+| H111     | Empire Hotel    | New York |     313 | H111     | S    | 145.00 | H111     | G256     | 1999-08-10 | 1999-08-15 |     412 | G256     | Adam Wayne    | Pittsburgh   |
+| H111     | Empire Hotel    | New York |     412 | H111     | N    | 145.00 | H111     | G256     | 1999-08-10 | 1999-08-15 |     412 | G256     | Adam Wayne    | Pittsburgh   |
+| H111     | Empire Hotel    | New York |     313 | H111     | S    | 145.00 | H111     | G367     | 1999-08-18 | 1999-08-21 |     412 | G367     | Tara Cummings | Baltimore    |
+| H111     | Empire Hotel    | New York |     412 | H111     | N    | 145.00 | H111     | G367     | 1999-08-18 | 1999-08-21 |     412 | G367     | Tara Cummings | Baltimore    |
+| H193     | Devon Hotel     | Boston   |    1001 | H193     | S    | 150.00 | H193     | G190     | 1999-11-15 | 1999-11-19 |    1001 | G190     | Edward Cane   | Baltimore    |
+| H193     | Devon Hotel     | Boston   |    1201 | H193     | N    | 175.00 | H193     | G190     | 1999-11-15 | 1999-11-19 |    1001 | G190     | Edward Cane   | Baltimore    |
+| H193     | Devon Hotel     | Boston   |    1001 | H193     | S    | 150.00 | H193     | G367     | 1999-09-12 | 1999-09-14 |    1001 | G367     | Tara Cummings | Baltimore    |
+| H193     | Devon Hotel     | Boston   |    1201 | H193     | N    | 175.00 | H193     | G367     | 1999-09-12 | 1999-09-14 |    1001 | G367     | Tara Cummings | Baltimore    |
+| H193     | Devon Hotel     | Boston   |    1001 | H193     | S    | 150.00 | H193     | G367     | 1999-10-01 | 1999-10-06 |    1201 | G367     | Tara Cummings | Baltimore    |
+| H193     | Devon Hotel     | Boston   |    1201 | H193     | N    | 175.00 | H193     | G367     | 1999-10-01 | 1999-10-06 |    1201 | G367     | Tara Cummings | Baltimore    |
+| H235     | Park Place      | New York |    1267 | H235     | N    | 175.00 | H235     | G879     | 1999-09-05 | 1999-09-12 |    1267 | G879     | Vanessa Parry | Pittsburgh   |
+| H235     | Park Place      | New York |    1289 | H235     | N    | 195.00 | H235     | G879     | 1999-09-05 | 1999-09-12 |    1267 | G879     | Vanessa Parry | Pittsburgh   |
+| H437     | Clairmont Hotel | Boston   |     223 | H437     | N    | 155.00 | H437     | G190     | 1999-10-04 | 1999-10-06 |     223 | G190     | Edward Cane   | Baltimore    |
+| H437     | Clairmont Hotel | Boston   |     257 | H437     | N    | 140.00 | H437     | G190     | 1999-10-04 | 1999-10-06 |     223 | G190     | Edward Cane   | Baltimore    |
+| H437     | Clairmont Hotel | Boston   |     223 | H437     | N    | 155.00 | H437     | G879     | 1999-09-14 | 1999-09-17 |     223 | G879     | Vanessa Parry | Pittsburgh   |
+| H437     | Clairmont Hotel | Boston   |     257 | H437     | N    | 140.00 | H437     | G879     | 1999-09-14 | 1999-09-17 |     223 | G879     | Vanessa Parry | Pittsburgh   |
+| H498     | James Plaza     | Toronto  |     345 | H498     | N    | 160.00 | H498     | G230     | 1999-09-15 | 1999-09-18 |     467 | G230     | Tom Hancock   | Philadelphia |
+| H498     | James Plaza     | Toronto  |     467 | H498     | N    | 180.00 | H498     | G230     | 1999-09-15 | 1999-09-18 |     467 | G230     | Tom Hancock   | Philadelphia |
+| H498     | James Plaza     | Toronto  |     345 | H498     | N    | 160.00 | H498     | G256     | 1999-11-30 | 1999-12-03 |     345 | G256     | Adam Wayne    | Pittsburgh   |
+| H498     | James Plaza     | Toronto  |     467 | H498     | N    | 180.00 | H498     | G256     | 1999-11-30 | 1999-12-03 |     345 | G256     | Adam Wayne    | Pittsburgh   |
+| H498     | James Plaza     | Toronto  |     345 | H498     | N    | 160.00 | H498     | G467     | 1999-11-03 | 1999-11-05 |     345 | G467     | Robert Swift  | Atlanta      |
+| H498     | James Plaza     | Toronto  |     467 | H498     | N    | 180.00 | H498     | G467     | 1999-11-03 | 1999-11-05 |     345 | G467     | Robert Swift  | Atlanta      |
++----------+-----------------+----------+---------+----------+------+--------+----------+----------+------------+------------+---------+----------+---------------+--------------+
+22 rows in set (0.00 sec)
+
+2.
+
+select * from hotel h,room r,booking b,guest g where h.hotel_no=r.hotel_no and r.hotel_no=b.hotel_no and b.guest_no=g.guest_no and h.city="New York";
++----------+--------------+----------+---------+----------+------+--------+----------+----------+------------+------------+---------+----------+---------------+------------+
+| hotel_no | name         | city     | room_no | hotel_no | type | price  | hotel_no | guest_no | date_from  | date_to    | room_no | guest_no | name          | city       |
++----------+--------------+----------+---------+----------+------+--------+----------+----------+------------+------------+---------+----------+---------------+------------+
+| H111     | Empire Hotel | New York |     313 | H111     | S    | 145.00 | H111     | G256     | 1999-08-10 | 1999-08-15 |     412 | G256     | Adam Wayne    | Pittsburgh |
+| H111     | Empire Hotel | New York |     412 | H111     | N    | 145.00 | H111     | G256     | 1999-08-10 | 1999-08-15 |     412 | G256     | Adam Wayne    | Pittsburgh |
+| H111     | Empire Hotel | New York |     313 | H111     | S    | 145.00 | H111     | G367     | 1999-08-18 | 1999-08-21 |     412 | G367     | Tara Cummings | Baltimore  |
+| H111     | Empire Hotel | New York |     412 | H111     | N    | 145.00 | H111     | G367     | 1999-08-18 | 1999-08-21 |     412 | G367     | Tara Cummings | Baltimore  |
+| H235     | Park Place   | New York |    1267 | H235     | N    | 175.00 | H235     | G879     | 1999-09-05 | 1999-09-12 |    1267 | G879     | Vanessa Parry | Pittsburgh |
+| H235     | Park Place   | New York |    1289 | H235     | N    | 195.00 | H235     | G879     | 1999-09-05 | 1999-09-12 |    1267 | G879     | Vanessa Parry | Pittsburgh |
++----------+--------------+----------+---------+----------+------+--------+----------+----------+------------+------------+---------+----------+---------------+------------+
+6 rows in set (0.00 sec)
+
+3.
+
+select name,city from guest order by city;
++---------------+--------------+
+| name          | city         |
++---------------+--------------+
+| Robert Swift  | Atlanta      |
+| Edward Cane   | Baltimore    |
+| Tara Cummings | Baltimore    |
+| Tom Hancock   | Philadelphia |
+| Adam Wayne    | Pittsburgh   |
+| Vanessa Parry | Pittsburgh   |
++---------------+--------------+
+6 rows in set (0.00 sec)
+
+4.
+
+select * from room where type="N" order by price;
++---------+----------+------+--------+
+| room_no | hotel_no | type | price  |
++---------+----------+------+--------+
+|     257 | H437     | N    | 140.00 |
+|     412 | H111     | N    | 145.00 |
+|     223 | H437     | N    | 155.00 |
+|     345 | H498     | N    | 160.00 |
+|    1201 | H193     | N    | 175.00 |
+|    1267 | H235     | N    | 175.00 |
+|     467 | H498     | N    | 180.00 |
+|    1289 | H235     | N    | 195.00 |
++---------+----------+------+--------+
+8 rows in set (0.00 sec)
+
+5.
+
+select count(*) as number_of_hotels from hotel;
++------------------+
+| number_of_hotels |
++------------------+
+|                6 |
++------------------+
+1 row in set (0.07 sec)
+
+6.
+
+select distinct city from guest;
++--------------+
+| city         |
++--------------+
+| Baltimore    |
+| Philadelphia |
+| Pittsburgh   |
+| Atlanta      |
++--------------+
+4 rows in set (0.00 sec)
+
+7.
+
+select avg(price) as avg_price_of_a_room from room;
++---------------------+
+| avg_price_of_a_room |
++---------------------+
+|          155.666667 |
++---------------------+
+1 row in set (0.00 sec)
+
+8.
+
+select name,room_no,type from hotel,room where hotel.hotel_no=room.hotel_no;
++------------------+---------+------+
+| name             | room_no | type |
++------------------+---------+------+
+| Empire Hotel     |     313 | S    |
+| Empire Hotel     |     412 | N    |
+| Devon Hotel      |    1001 | S    |
+| Devon Hotel      |    1201 | N    |
+| Park Place       |    1267 | N    |
+| Park Place       |    1289 | N    |
+| Brownstone Hotel |     876 | S    |
+| Brownstone Hotel |     898 | S    |
+| Clairmont Hotel  |     223 | N    |
+| Clairmont Hotel  |     257 | N    |
+| James Plaza      |     345 | N    |
+| James Plaza      |     467 | N    |
++------------------+---------+------+
+12 rows in set (0.00 sec)
+
+9.
+
+select name,date_format(date_from,"%d-%b-%y") as date_from,date_format(date_to,"%d-%b-%y") as date_to,room_no from hotel h,booking b where h.city="New York";
++--------------+-----------+-----------+---------+
+| name         | date_from | date_to   | room_no |
++--------------+-----------+-----------+---------+
+| Empire Hotel | 10-Aug-99 | 15-Aug-99 |     412 |
+| Park Place   | 10-Aug-99 | 15-Aug-99 |     412 |
+| Empire Hotel | 18-Aug-99 | 21-Aug-99 |     412 |
+| Park Place   | 18-Aug-99 | 21-Aug-99 |     412 |
+| Empire Hotel | 05-Sep-99 | 12-Sep-99 |    1267 |
+| Park Place   | 05-Sep-99 | 12-Sep-99 |    1267 |
+| Empire Hotel | 15-Sep-99 | 18-Sep-99 |     467 |
+| Park Place   | 15-Sep-99 | 18-Sep-99 |     467 |
+| Empire Hotel | 30-Nov-99 | 03-Dec-99 |     345 |
+| Park Place   | 30-Nov-99 | 03-Dec-99 |     345 |
+| Empire Hotel | 03-Nov-99 | 05-Nov-99 |     345 |
+| Park Place   | 03-Nov-99 | 05-Nov-99 |     345 |
+| Empire Hotel | 15-Nov-99 | 19-Nov-99 |    1001 |
+| Park Place   | 15-Nov-99 | 19-Nov-99 |    1001 |
+| Empire Hotel | 12-Sep-99 | 14-Sep-99 |    1001 |
+| Park Place   | 12-Sep-99 | 14-Sep-99 |    1001 |
+| Empire Hotel | 01-Oct-99 | 06-Oct-99 |    1201 |
+| Park Place   | 01-Oct-99 | 06-Oct-99 |    1201 |
+| Empire Hotel | 04-Oct-99 | 06-Oct-99 |     223 |
+| Park Place   | 04-Oct-99 | 06-Oct-99 |     223 |
+| Empire Hotel | 14-Sep-99 | 17-Sep-99 |     223 |
+| Park Place   | 14-Sep-99 | 17-Sep-99 |     223 |
++--------------+-----------+-----------+---------+
+22 rows in set (0.00 sec)
+
+10.
+
+select count(*) from booking where month(date_from)=9;
++----------+
+| count(*) |
++----------+
+|        4 |
++----------+
+1 row in set (0.00 sec)
+
+11.
+
+select name,city from guest where guest_no in (select guest_no from booking b join hotel h on b.hotel_no=h.hotel_no where month(date_from)=8 and city="New York");
++---------------+------------+
+| name          | city       |
++---------------+------------+
+| Adam Wayne    | Pittsburgh |
+| Tara Cummings | Baltimore  |
++---------------+------------+
+2 rows in set (0.04 sec)
+
+12.
+
+select name,room_no from room join hotel on room.hotel_no=hotel.hotel_no where room_no not in (select room_no from booking);
++------------------+---------+
+| name             | room_no |
++------------------+---------+
+| Empire Hotel     |     313 |
+| Park Place       |    1289 |
+| Brownstone Hotel |     876 |
+| Brownstone Hotel |     898 |
+| Clairmont Hotel  |     257 |
++------------------+---------+
+5 rows in set (0.00 sec)
+
+13.
+
+select name,city from hotel where hotel_no=(select hotel_no from room where price=(select max(price) from room));
++------------+----------+
+| name       | city     |
++------------+----------+
+| Park Place | New York |
++------------+----------+
+1 row in set (0.00 sec)
+
+14.
+
+select name,room_no,city,price from room join hotel on room.hotel_no=hotel.hotel_no where price<(select min(price) from room r join hotel h on r.hotel_no=h.hotel_no where city="Boston");
++------------------+---------+---------+--------+
+| name             | room_no | city    | price  |
++------------------+---------+---------+--------+
+| Brownstone Hotel |     876 | Toronto | 124.00 |
+| Brownstone Hotel |     898 | Toronto | 124.00 |
++------------------+---------+---------+--------+
+2 rows in set (0.00 sec)
+
+15.
+
+select avg(price),city from room join hotel on room.hotel_no=hotel.hotel_no group by city;
++------------+----------+
+| avg(price) | city     |
++------------+----------+
+| 165.000000 | New York |
+| 155.000000 | Boston   |
+| 147.000000 | Toronto  |
++------------+----------+
+3 rows in set (0.00 sec)
+                                             or
+
+select avg(price) from room join hotel on room.hotel_no=hotel.hotel_no group by city;
++------------+
+| avg(price) |
++------------+
+| 165.000000 |
+| 155.000000 |
+| 147.000000 |
++------------+
+3 rows in set (0.00 sec)
+
+                                                          or
+
+select avg(price) from room where price in (select avg(price) from room join hotel on room.hotel_no=hotel.hotel_no group by city);
++------------+
+| avg(price) |
++------------+
+| 155.000000 |
++------------+
+1 row in set (0.00 sec)
